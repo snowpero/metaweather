@@ -55,6 +55,8 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation "androidx.recyclerview:recyclerview:1.2.0-beta02"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0"
@@ -82,6 +84,7 @@ dependencies {
      * Rx
      */
     implementation "io.reactivex.rxjava3:rxjava:3.0.10"
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
 
     /**
      * Dagger
@@ -93,4 +96,9 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+
+    /**
+     * 3rd Lib
+     */
+    implementation 'com.kaopiz:kprogresshud:1.2.0'
 }

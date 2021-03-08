@@ -2,36 +2,37 @@ package com.ninis.metaweather.network
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import com.ninis.metaweather.data.ConsolidatedWeather
+import com.ninis.metaweather.data.WeatherItem
+import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.core.Single
+import okhttp3.ResponseBody
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MainRepository(
     retrofit: Retrofit
 ) {
     private val service by lazy { retrofit.create(ApiService::class.java) }
 
-    interface ApiService {
-        @GET("/api/location/search/")
-        fun getSearch(@Query("query") query: String)
-
-        @GET("/api/location/{woeid}/")
-        fun getDetailWeather(@Path("woeid") woeid: Int)
+    fun getSearch(query: String): Single<Response<ArrayList<WeatherItem>>> {
+        return service.getSearch(query)
     }
 
-    data class WeatherItem(
-        @SerializedName("title")
-        @Expose
-        val title: String,
-        @SerializedName("location_type")
-        @Expose
-        val locationType: String,
-        @SerializedName("woeid")
-        @Expose
-        val woeid: Int,
-        @SerializedName("latt_long")
-        @Expose
-        val latLng: String
-    )
+    fun getDetailWeather(woeid: Int): Single<Response<ConsolidatedWeather>> {
+        return service.getDetailWeather(woeid)
+    }
+
+    interface ApiService {
+        @GET("/api/location/search/")
+        fun getSearch(@Query("query") query: String): Single<Response<ArrayList<WeatherItem>>>
+
+        @GET("/api/location/{woeid}/")
+        fun getDetailWeather(@Path("woeid") woeid: Int): Single<Response<ConsolidatedWeather>>
+    }
 }
