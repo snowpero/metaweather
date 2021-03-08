@@ -104,8 +104,6 @@ class MainViewModel(
     }
 
     fun setListData() {
-        Log.d("NINIS11", "setListData ${weathers.value?.size} ${detailWeathersMap.value?.size}")
-
         weathers.value?.let {
             for (weather in it) {
                 detailWeathersMap.value?.let { detail ->
